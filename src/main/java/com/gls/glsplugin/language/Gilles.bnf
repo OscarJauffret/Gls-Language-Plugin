@@ -1,0 +1,72 @@
+{
+  parserClass="org.intellij.sdk.language.parser.GillesParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Gilles"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.intellij.sdk.language.psi"
+  psiImplPackage="org.intellij.sdk.language.psi.impl"
+
+  elementTypeHolderClass="org.intellij.sdk.language.psi.GillesTypes"
+  elementTypeClass="org.intellij.sdk.language.psi.GillesElementType"
+  tokenTypeClass="org.intellij.sdk.language.psi.GillesTokenType"
+
+  tokens=[
+    PROGNAME = "regexp:[A-Z]([a-z]|_)*"
+    VARNAME = "regexp:[a-z]([a-z]|\\d)*"
+    NUMBER = "regexp:\d+"
+    LET = "LET"
+    BE = "BE"
+    END = "END"
+    COLON = ":"
+    ASSIGN_OP = "="
+    LPAREN = "("
+    RPAREN = ")"
+    MINUS = "-"
+    PLUS = "+"
+    TIMES = "*"
+    DIVIDE = "/"
+    IF_INSTR = "IF"
+    THEN = "THEN"
+    ELSE = "ELSE"
+    LBRACK = "{"
+    RBRACK = "}"
+    IMPLIES = "->"
+    PIPE = "|"
+    EQUAL = "=="
+    SMALEQ = "<="
+    SMALLER = "<"
+    WHILE_INSTR = "WHILE"
+    REPEAT = "REPEAT"
+    OUTPUT_OP = "OUT"
+    INPUT_OP = "IN"
+
+    LINE_COMMENT = "regexp:\$ [^\n]*"
+    MULTI_LINE_COMMENT = "regexp:!![^!]*!!"
+]
+}
+
+
+
+Program ::= "LET" PROGNAME "BE" Code "END";
+Code ::= (Instruction ":")*;
+Instruction ::= Assign | If | While | Output | Input;
+Assign ::= VARNAME "=" ExprArith;
+
+ExprArith ::= Term ExprArithPrime;
+ExprArithPrime ::= Op Term ExprArithPrime |;
+Term ::= VARNAME | NUMBER | "("ExprArith")" | "-" Term;
+
+Op ::= "+" | "-" | "*" | "/";
+If ::= IF_INSTR "{"Cond"}" "THEN" Code "END" | IF_INSTR "{"Cond"}" "THEN" Code "ELSE" Code "END";
+
+Cond ::= SimpleCond CondPrime;
+CondPrime ::= "-" SimpleCond CondPrime | "|" SimpleCond "|" CondPrime |;
+SimpleCond ::= ExprArith Comp ExprArith;
+
+Comp ::= "==" | "=" | "<=" | "<";
+While ::= WHILE_INSTR "{"Cond"}" "REPEAT" Code "END";
+Output ::= OUTPUT_OP "(" VARNAME ")";
+Input ::= INPUT_OP "(" VARNAME ")";
+
