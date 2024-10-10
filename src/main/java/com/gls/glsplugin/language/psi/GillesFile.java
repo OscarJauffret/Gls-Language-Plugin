@@ -1,5 +1,7 @@
-package com.gls.glsplugin.language;
+package com.gls.glsplugin.language.psi;
 
+import com.gls.glsplugin.language.GillesFileType;
+import com.gls.glsplugin.language.GillesLanguage;
 import com.intellij.extapi.psi.PsiFileBase;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.FileViewProvider;

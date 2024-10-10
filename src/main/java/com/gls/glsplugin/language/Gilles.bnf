@@ -1,16 +1,18 @@
 {
-  parserClass="org.intellij.sdk.language.parser.GillesParser"
+  parserClass="com.gls.glsplugin.language.parser.GillesParser"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
   psiClassPrefix="Gilles"
   psiImplClassSuffix="Impl"
-  psiPackage="org.intellij.sdk.language.psi"
-  psiImplPackage="org.intellij.sdk.language.psi.impl"
+  psiPackage="com.gls.glsplugin.language.psi"
+  psiImplPackage="com.gls.glsplugin.language.psi.impl"
 
-  elementTypeHolderClass="org.intellij.sdk.language.psi.GillesTypes"
-  elementTypeClass="org.intellij.sdk.language.psi.GillesElementType"
-  tokenTypeClass="org.intellij.sdk.language.psi.GillesTokenType"
+  elementTypeHolderClass="com.gls.glsplugin.language.psi.GillesTypes"
+  elementTypeClass="com.gls.glsplugin.language.psi.GillesElementType"
+  tokenTypeClass="com.gls.glsplugin.language.psi.GillesTokenType"
+
+  psiImplUtilClass="com.gls.glsplugin.language.psi.impl.GillesPsiImplUtil"
 
   tokens=[
     PROGNAME = "regexp:[A-Z]([a-z]|_)*"
@@ -47,8 +49,11 @@
 
 Program ::= "LET" PROGNAME "BE" Code "END";
 Code ::= (Instruction ":")*;
-Instruction ::= Assign | If | While | Output | Input;
-Assign ::= VARNAME "=" ExprArith;
+Instruction ::= Property | If | While | Output | Input;
+
+Property ::= (VARNAME ASSIGN_OP ExprArith) {
+  methods=[getKey getValue]
+}
 
 ExprArith ::= Term (Op Term)*;
 Term ::= VARNAME | NUMBER | "(" ExprArith ")" | "-" Term;

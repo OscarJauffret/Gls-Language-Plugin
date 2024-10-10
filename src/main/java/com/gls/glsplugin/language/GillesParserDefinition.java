@@ -1,5 +1,6 @@
 package com.gls.glsplugin.language;
 
+import com.gls.glsplugin.language.psi.GillesFile;
 import com.gls.glsplugin.language.psi.GillesTokenSets;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -12,8 +13,8 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.JavaDocElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import org.intellij.sdk.language.parser.GillesParser;
-import org.intellij.sdk.language.psi.GillesTypes;
+import com.gls.glsplugin.language.parser.GillesParser;
+import com.gls.glsplugin.language.psi.GillesTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class GillesParserDefinition implements ParserDefinition {

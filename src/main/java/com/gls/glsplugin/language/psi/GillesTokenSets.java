@@ -1,7 +1,7 @@
 package com.gls.glsplugin.language.psi;
 
 import com.intellij.psi.tree.TokenSet;
-import org.intellij.sdk.language.psi.GillesTypes;
+import com.gls.glsplugin.language.psi.GillesTypes;
 
 public interface GillesTokenSets {
     TokenSet ARITHMETIC_OPERATORS = TokenSet.create(GillesTypes.PLUS, GillesTypes.MINUS, GillesTypes.TIMES,
