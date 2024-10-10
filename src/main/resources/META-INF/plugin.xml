@@ -35,5 +35,6 @@
         <lang.syntaxHighlighterFactory
                 language="Gilles"
                 implementationClass="com.gls.glsplugin.language.GillesSyntaxHighlighterFactory"/>
+        <colorSettingsPage implementation="com.gls.glsplugin.language.GillesColorSettingsPage"/>
     </extensions>
 </idea-plugin>

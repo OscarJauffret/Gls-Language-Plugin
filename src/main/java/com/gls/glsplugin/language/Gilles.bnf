@@ -41,12 +41,8 @@
     REPEAT = "REPEAT"
     OUTPUT_OP = "OUT"
     INPUT_OP = "IN"
-
-    LINE_COMMENT = "regexp:\$ [^\n]*"
-    MULTI_LINE_COMMENT = "regexp:!![^!]*!!"
 ]
 }
-
 
 
 Program ::= "LET" PROGNAME "BE" Code "END";

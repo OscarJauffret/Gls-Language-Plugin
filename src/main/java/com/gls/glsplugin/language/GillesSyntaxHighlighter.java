@@ -6,6 +6,7 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.intellij.sdk.language.psi.GillesTypes;
@@ -18,6 +19,8 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("GILLES_SEPARATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
     public static final TextAttributesKey KEY =
             createTextAttributesKey("GILLES_KEY", DefaultLanguageHighlighterColors.KEYWORD);
+    public static final TextAttributesKey FUNCTION =
+            createTextAttributesKey("GILLES_FUNCTION", DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
     public static final TextAttributesKey VALUE =
             createTextAttributesKey("GILLES_VALUE", DefaultLanguageHighlighterColors.STRING);
     public static final TextAttributesKey LINE_COMMENT =
@@ -33,6 +36,7 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
     private static final TextAttributesKey[] SEPARATOR_KEYS = new TextAttributesKey[]{SEPARATOR};
     private static final TextAttributesKey[] KEY_KEYS = new TextAttributesKey[]{KEY};
+    private static final TextAttributesKey[] FUNCTION_KEYS = new TextAttributesKey[]{FUNCTION};
     private static final TextAttributesKey[] VALUE_KEYS = new TextAttributesKey[]{VALUE};
     private static final TextAttributesKey[] LINE_COMMENT_KEYS = new TextAttributesKey[]{LINE_COMMENT};
     private static final TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[]{BLOCK_COMMENT};
@@ -62,16 +66,16 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
     public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
         if (tokenType.equals(GillesTypes.VARNAME)) {
             return VALUE_KEYS;
+        } else if (tokenType.equals(GillesTypes.PROGNAME)) {
+            return FUNCTION_KEYS;
         } else if (tokenType.equals(TokenType.BAD_CHARACTER)) {
             return BAD_CHAR_KEYS;
         } else if (GillesTokenSets.LITERALS.contains(tokenType)) {
             return KEY_KEYS;
         } else if (GillesTokenSets.KEYWORDS.contains(tokenType)) {
             return KEY_KEYS;
-        } else if (tokenType.equals(GillesTypes.LINE_COMMENT)) {
+        } else if (tokenType.equals(TokenType.WHITE_SPACE)) {
             return LINE_COMMENT_KEYS;
-        } else if (tokenType.equals(GillesTypes.MULTI_LINE_COMMENT)) {
-            return BLOCK_COMMENT_KEYS;
         }
         return EMPTY_KEYS;
 
