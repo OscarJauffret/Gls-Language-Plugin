@@ -54,16 +54,14 @@ Code ::= (Instruction ":")*;
 Instruction ::= Assign | If | While | Output | Input;
 Assign ::= VARNAME "=" ExprArith;
 
-ExprArith ::= Term ExprArithPrime;
-ExprArithPrime ::= Op Term ExprArithPrime |;
-Term ::= VARNAME | NUMBER | "("ExprArith")" | "-" Term;
+ExprArith ::= Term (Op Term)*;
+Term ::= VARNAME | NUMBER | "(" ExprArith ")" | "-" Term;
 
 Op ::= "+" | "-" | "*" | "/";
 If ::= IF_INSTR "{"Cond"}" "THEN" Code "END" | IF_INSTR "{"Cond"}" "THEN" Code "ELSE" Code "END";
 
-Cond ::= SimpleCond CondPrime;
-CondPrime ::= "-" SimpleCond CondPrime | "|" SimpleCond "|" CondPrime |;
-SimpleCond ::= ExprArith Comp ExprArith;
+Cond ::= CondPrime (IMPLIES CondPrime)*;
+CondPrime ::= PIPE Cond PIPE | ExprArith Comp ExprArith;
 
 Comp ::= "==" | "=" | "<=" | "<";
 While ::= WHILE_INSTR "{"Cond"}" "REPEAT" Code "END";

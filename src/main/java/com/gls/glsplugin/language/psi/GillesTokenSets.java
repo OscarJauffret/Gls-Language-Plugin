@@ -18,4 +18,6 @@ public interface GillesTokenSets {
     TokenSet LITERALS = TokenSet.create(GillesTypes.NUMBER, GillesTypes.VARNAME, GillesTypes.PROGNAME);
 
     TokenSet IO_OPERATORS = TokenSet.create(GillesTypes.INPUT_OP, GillesTypes.OUTPUT_OP);
+
+    TokenSet COMMENTS = TokenSet.create(GillesTypes.LINE_COMMENT, GillesTypes.MULTI_LINE_COMMENT);
 }

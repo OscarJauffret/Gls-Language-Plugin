@@ -20,8 +20,10 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("GILLES_KEY", DefaultLanguageHighlighterColors.KEYWORD);
     public static final TextAttributesKey VALUE =
             createTextAttributesKey("GILLES_VALUE", DefaultLanguageHighlighterColors.STRING);
-    public static final TextAttributesKey COMMENT =
+    public static final TextAttributesKey LINE_COMMENT =
             createTextAttributesKey("GILLES_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+    public static final TextAttributesKey BLOCK_COMMENT =
+            createTextAttributesKey("GILLES_BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
     public static final TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey("GILLES_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
     public static final TextAttributesKey IDENTIFIER =
@@ -32,7 +34,8 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] SEPARATOR_KEYS = new TextAttributesKey[]{SEPARATOR};
     private static final TextAttributesKey[] KEY_KEYS = new TextAttributesKey[]{KEY};
     private static final TextAttributesKey[] VALUE_KEYS = new TextAttributesKey[]{VALUE};
-    private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{COMMENT};
+    private static final TextAttributesKey[] LINE_COMMENT_KEYS = new TextAttributesKey[]{LINE_COMMENT};
+    private static final TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[]{BLOCK_COMMENT};
     private static final TextAttributesKey[] IDENTIFIER_KEYS = new TextAttributesKey[]{IDENTIFIER};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
 
@@ -65,6 +68,10 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
             return KEY_KEYS;
         } else if (GillesTokenSets.KEYWORDS.contains(tokenType)) {
             return KEY_KEYS;
+        } else if (tokenType.equals(GillesTypes.LINE_COMMENT)) {
+            return LINE_COMMENT_KEYS;
+        } else if (tokenType.equals(GillesTypes.MULTI_LINE_COMMENT)) {
+            return BLOCK_COMMENT_KEYS;
         }
         return EMPTY_KEYS;
 
