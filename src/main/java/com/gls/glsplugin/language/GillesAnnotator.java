@@ -1,5 +1,6 @@
 package com.gls.glsplugin.language;
 
+import com.gls.glsplugin.language.psi.GillesAssign;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -8,7 +9,6 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLiteralExpression;
-import com.gls.glsplugin.language.psi.GillesProgram;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -47,7 +47,7 @@ public class GillesAnnotator implements Annotator {
 
         // Get the list of properties for given key
         String key = value.substring(GILLES_PREFIX_STR.length() + GILLES_SEPARATOR_STR.length());
-        List<GillesProgram> properties = GillesUtil.findProperties(element.getProject(), key);
+        List<GillesAssign> properties = GillesUtil.findProperties(element.getProject(), key);
         if (properties.isEmpty()) {
             holder.newAnnotation(HighlightSeverity.ERROR, "Unresolved property")
                     .range(keyRange)

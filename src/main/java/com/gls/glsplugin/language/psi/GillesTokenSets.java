@@ -12,7 +12,7 @@ public interface GillesTokenSets {
             GillesTypes.COLON, GillesTypes.PIPE);
 
     TokenSet KEYWORDS = TokenSet.create(GillesTypes.IF_INSTR, GillesTypes.THEN, GillesTypes.ELSE,
-            GillesTypes.WHILE_INSTR, GillesTypes.REPEAT, GillesTypes.END, GillesTypes.LET, GillesTypes.BE, GillesTypes.IF);
+            GillesTypes.WHILE_INSTR, GillesTypes.REPEAT, GillesTypes.END, GillesTypes.LET, GillesTypes.BE);
 
     TokenSet LITERALS = TokenSet.create(GillesTypes.NUMBER, GillesTypes.VARNAME, GillesTypes.PROGNAME);
 

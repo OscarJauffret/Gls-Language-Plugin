@@ -48,15 +48,17 @@
 
 GillesFile ::= Program;
 
-Program ::= ("LET" PROGNAME "BE" Code "END") {
-    mixin="com.gls.glsplugin.language.psi.impl.GillesNamedElementImpl"
-    implements="com.gls.glsplugin.language.psi.GillesNamedElement"
-    methods=[getProgName getBody getName setName getNameIdentifier]
-}
+Program ::= "LET" PROGNAME "BE" Code "END"
 Code ::= (Instruction ":")*;
 Instruction ::= Assign | If | While | Output | Input;
 
-Assign ::= VARNAME ASSIGN_OP ExprArith
+Assign ::= VARNAME ASSIGN_OP ExprArith {
+    pin=3
+    recoverWhile="recover_property"
+    mixin="com.gls.glsplugin.language.psi.impl.GillesNamedElementImpl"
+    implements="com.gls.glsplugin.language.psi.GillesNamedElement"
+    methods=[getKey getValue getName setName getNameIdentifier]
+}
 
 ExprArith ::= Term (Op Term)*;
 Term ::= VARNAME | NUMBER | "(" ExprArith ")" | "-" Term;
