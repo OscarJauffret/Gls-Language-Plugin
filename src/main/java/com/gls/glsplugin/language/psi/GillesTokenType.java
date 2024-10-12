@@ -12,6 +12,6 @@ public class GillesTokenType extends IElementType {
 
     @Override
     public String toString() {
-        return "GlsTokenType." + super.toString();
+        return "GillesTokenType." + super.toString();
     }
 }

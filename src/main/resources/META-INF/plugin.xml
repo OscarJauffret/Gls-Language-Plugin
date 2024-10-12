@@ -37,5 +37,10 @@
                 language="Gilles"
                 implementationClass="com.gls.glsplugin.language.GillesSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="com.gls.glsplugin.language.GillesColorSettingsPage"/>
+        <annotator language="JAVA" implementationClass="com.gls.glsplugin.language.GillesAnnotator"/>
+        <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.gls.glsplugin.language.GillesLineMarkerProvider"/>
+        <completion.contributor language="Gilles" implementationClass="com.gls.glsplugin.language.GillesCompletionContributor"/>
+        <!-- <psi.referenceContributor language="JAVA" implementation="com.gls.glsplugin.language.GillesReferenceContributor"/>
+        <lang.refactoringSupport language="Gilles" implementationClass="com.gls.glsplugin.language.GillesRefactoringSupportProvider"/> -->
     </extensions>
 </idea-plugin>

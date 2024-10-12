@@ -65,16 +65,16 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
     public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
         if (tokenType.equals(GillesTypes.VARNAME)) {
             return VALUE_KEYS;
-        } else if (tokenType.equals(GillesTypes.PROGNAME)) {
-            return FUNCTION_KEYS;
-        } else if (tokenType.equals(TokenType.BAD_CHARACTER)) {
-            return BAD_CHAR_KEYS;
-        } else if (GillesTokenSets.LITERALS.contains(tokenType)) {
+        } else if (tokenType.equals(GillesTypes.NUMBER)) {
             return KEY_KEYS;
         } else if (GillesTokenSets.KEYWORDS.contains(tokenType)) {
             return KEY_KEYS;
         } else if (tokenType.equals(TokenType.WHITE_SPACE)) {
             return LINE_COMMENT_KEYS;
+        } else if (tokenType.equals(GillesTypes.PROGNAME)) {
+            return FUNCTION_KEYS;
+        } else if (tokenType.equals(TokenType.BAD_CHARACTER)) {
+            return BAD_CHAR_KEYS;
         }
         return EMPTY_KEYS;
 

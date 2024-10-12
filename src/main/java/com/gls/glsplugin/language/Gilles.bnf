@@ -46,14 +46,17 @@
 ]
 }
 
+GillesFile ::= Program;
 
-Program ::= "LET" PROGNAME "BE" Code "END";
-Code ::= (Instruction ":")*;
-Instruction ::= Property | If | While | Output | Input;
-
-Property ::= (VARNAME ASSIGN_OP ExprArith) {
-  methods=[getKey getValue]
+Program ::= ("LET" PROGNAME "BE" Code "END") {
+    mixin="com.gls.glsplugin.language.psi.impl.GillesNamedElementImpl"
+    implements="com.gls.glsplugin.language.psi.GillesNamedElement"
+    methods=[getProgName getBody getName setName getNameIdentifier]
 }
+Code ::= (Instruction ":")*;
+Instruction ::= Assign | If | While | Output | Input;
+
+Assign ::= VARNAME ASSIGN_OP ExprArith
 
 ExprArith ::= Term (Op Term)*;
 Term ::= VARNAME | NUMBER | "(" ExprArith ")" | "-" Term;
