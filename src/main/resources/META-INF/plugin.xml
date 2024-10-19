@@ -1,20 +1,29 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.gls.GlsPlugin</id>
+    <id>com.gls.GlsLanguage</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>GlsPlugin</name>
+    <name>Gilles Language</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="oscarjauffret@gmail.com">Oscour</vendor>
+    <vendor email="oscarjauffret@gmail.com">Oscar Jauffret</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    This plugin adds syntax highlighting for the *made up* Gls language.
+    This plugin adds features such as syntax highlighting for the *made up* Gilles language.
+
+    <p>Features:</p>
+    <ul>
+      <li>Syntax highlighting</li>
+      <li>Custom file type</li>
+      <li>Color settings page</li>
+    </ul>
+
+    If you have any feedback or issues, please feel free to leave them on the <a href="https://github.com/OscarJauffret/Gls-Language-Plugin/issues">GitHub page</a>.
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
@@ -39,8 +48,8 @@
         <colorSettingsPage implementation="com.gls.glsplugin.language.GillesColorSettingsPage"/>
         <annotator language="JAVA" implementationClass="com.gls.glsplugin.language.GillesAnnotator"/>
         <codeInsight.lineMarkerProvider language="JAVA" implementationClass="com.gls.glsplugin.language.GillesLineMarkerProvider"/>
-        <completion.contributor language="Gilles" implementationClass="com.gls.glsplugin.language.GillesCompletionContributor"/>
+        <!-- <completion.contributor language="Gilles" implementationClass="com.gls.glsplugin.language.GillesCompletionContributor"/>
         <psi.referenceContributor language="JAVA" implementation="com.gls.glsplugin.language.GillesReferenceContributor"/>
-        <lang.refactoringSupport language="Gilles" implementationClass="com.gls.glsplugin.language.GillesRefactoringSupportProvider"/>
+        <lang.refactoringSupport language="Gilles" implementationClass="com.gls.glsplugin.language.GillesRefactoringSupportProvider"/> -->
     </extensions>
 </idea-plugin>
