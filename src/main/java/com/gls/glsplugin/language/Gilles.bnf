@@ -46,7 +46,7 @@
 ]
 }
 
-GillesFile ::= Program;
+GillesFile ::= Program?;
 
 Program ::= "LET" PROGNAME "BE" Code "END"
 Code ::= (Instruction ":")*;
