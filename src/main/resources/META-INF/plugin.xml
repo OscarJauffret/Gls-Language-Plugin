@@ -32,7 +32,7 @@
     <depends>com.intellij.java</depends>
 
     <version>1.0</version>
-    <idea-version since-build="241.0" until-build="242.*"/>
+    <idea-version since-build="241.0" until-build="243.*"/>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->

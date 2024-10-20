@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GlsLanguage:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GlsLanguage_jar</output-path>
+    <root id="archive" name="GlsPlugin.jar" />
+  </artifact>
+</component>

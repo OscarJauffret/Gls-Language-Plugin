@@ -31,6 +31,8 @@ PROGNAME=[A-Z]([a-z]|_)*
 VARNAME=[a-z]([a-z]|\[0-9])*
 NUMBER=[0-9]+
 
+INVALID_NAME=([A-Z]|[a-z]|[0-9]|_)+
+
 MultilineComment = "!!"
 Comment = "$"
 
@@ -70,6 +72,7 @@ Comment = "$"
   {PROGNAME}          { return PROGNAME; }
   {VARNAME}           { return VARNAME; }
   {NUMBER}            { return NUMBER; }
+  {INVALID_NAME}      { return BAD_CHARACTER; }
 
 [^] { return BAD_CHARACTER; }
 }
