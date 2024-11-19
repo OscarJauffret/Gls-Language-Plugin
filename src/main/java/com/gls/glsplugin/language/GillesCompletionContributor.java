@@ -1,5 +1,6 @@
 package com.gls.glsplugin.language;
 
+import com.gls.glsplugin.language.psi.GillesTypes;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
@@ -20,32 +21,46 @@ public class GillesCompletionContributor extends CompletionContributor {
 
     public GillesCompletionContributor() {
         initFirstSets();
-        extend(CompletionType.BASIC, PlatformPatterns.psiElement(), new CompletionProvider<>() {
-            @Override
-            protected void addCompletions(@NotNull CompletionParameters parameters,
-                                          @NotNull ProcessingContext context,
-                                          @NotNull CompletionResultSet resultSet) {
-                PsiElement position = parameters.getPosition();
-                String contextKey = getContextKey(position);
-                if (contextKey == null) {
-                    return;
-                }
-                Set<String> possibleContexts = parseContext(contextKey);
-                System.out.println("possibleContexts: " + possibleContexts);
-                for (String possibleContext : possibleContexts) {
-                    Set<String> suggestions = firstSets.get(possibleContext);
-                    if (suggestions != null) {
-                        for (String suggestion : suggestions) {
-                            resultSet.addElement(LookupElementBuilder.create(suggestion));
-                        }
-                    } else {
-                        if (possibleContext.startsWith("GillesTokenType.")) {
-                            resultSet.addElement(LookupElementBuilder.create(possibleContext.substring(16)));
-                        }
+        extend(CompletionType.BASIC,
+                PlatformPatterns.psiElement()
+                        .afterLeaf(PlatformPatterns.psiElement(GillesTypes.LET)),
+                new CompletionProvider<>() {
+                    @Override
+                    protected void addCompletions(@NotNull CompletionParameters parameters,
+                                                  @NotNull ProcessingContext context,
+                                                  @NotNull CompletionResultSet resultSet) {
+                        // Suggestions pour le nom du programme
+                        resultSet.addElement(LookupElementBuilder.create("My_program"));
+                        resultSet.addElement(LookupElementBuilder.create("Another_program"));
                     }
-                }
-            }
-        });
+                });
+
+//        extend(CompletionType.BASIC, PlatformPatterns.psiElement(), new CompletionProvider<>() {
+//            @Override
+//            protected void addCompletions(@NotNull CompletionParameters parameters,
+//                                          @NotNull ProcessingContext context,
+//                                          @NotNull CompletionResultSet resultSet) {
+//                PsiElement position = parameters.getPosition();
+//                String contextKey = getContextKey(position);
+//                if (contextKey == null) {
+//                    return;
+//                }
+//                Set<String> possibleContexts = parseContext(contextKey);
+//                System.out.println("possibleContexts: " + possibleContexts);
+//                for (String possibleContext : possibleContexts) {
+//                    Set<String> suggestions = firstSets.get(possibleContext);
+//                    if (suggestions != null) {
+//                        for (String suggestion : suggestions) {
+//                            resultSet.addElement(LookupElementBuilder.create(suggestion));
+//                        }
+//                    } else {
+//                        if (possibleContext.startsWith("GillesTokenType.")) {
+//                            resultSet.addElement(LookupElementBuilder.create(possibleContext.substring(16)));
+//                        }
+//                    }
+//                }
+//            }
+//        });
     }
     private void initFirstSets() {
         firstSets.put("<program>", Set.of("LET"));
