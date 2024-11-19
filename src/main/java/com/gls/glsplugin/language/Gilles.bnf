@@ -60,16 +60,21 @@ Assign ::= VARNAME ASSIGN_OP ExprArith {
     methods=[getKey getValue getName setName getNameIdentifier]
 }
 
-ExprArith ::= Term (Op Term)*;
-Term ::= VARNAME | NUMBER | "(" ExprArith ")" | "-" Term;
+ExprArith ::= Prod ExprArithTail;
+ExprArithTail ::= ("+" Prod ExprArithTail | "-" Prod ExprArithTail)? ;
+Prod ::= Factor ProdTail;
+ProdTail ::= ("*" Factor ProdTail | "/" Factor ProdTail)? ;
+Factor ::= "-"Factor | Atom;
+Atom ::= VARNAME | NUMBER | "(" ExprArith ")";
 
-Op ::= "+" | "-" | "*" | "/";
-If ::= IF_INSTR "{"Cond"}" "THEN" Code "END" | IF_INSTR "{"Cond"}" "THEN" Code "ELSE" Code "END";
+If ::= IF_INSTR "{"Cond"}" "THEN" Code IfTail;
+IfTail ::= "ELSE" Code "END" | "END";
 
-Cond ::= CondPrime (IMPLIES CondPrime)*;
-CondPrime ::= PIPE Cond PIPE | ExprArith Comp ExprArith;
+Cond ::= FinalCond CondTail;
+CondTail ::= (IMPLIES Cond)?;
+FinalCond ::= PIPE Cond PIPE | ExprArith Comp ExprArith;
 
-Comp ::= "==" | "=" | "<=" | "<";
+Comp ::= "==" | "<=" | "<";
 While ::= WHILE_INSTR "{"Cond"}" "REPEAT" Code "END";
 Output ::= OUTPUT_OP "(" VARNAME ")";
 Input ::= INPUT_OP "(" VARNAME ")";
