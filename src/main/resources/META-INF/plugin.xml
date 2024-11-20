@@ -59,5 +59,6 @@
         <liveTemplateContext
                 contextId="GILLES"
                 implementation="com.gls.glsplugin.language.GillesContext"/>
+        <lang.commenter language="Gilles" implementationClass="com.gls.glsplugin.language.GillesCommenter"/>
     </extensions>
 </idea-plugin>
