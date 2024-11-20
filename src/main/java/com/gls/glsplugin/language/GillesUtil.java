@@ -1,6 +1,6 @@
 package com.gls.glsplugin.language;
 
-import com.gls.glsplugin.language.psi.GillesAssign;
+import com.gls.glsplugin.language.psi.GillesAssignBlock;
 
 import com.google.common.collect.Lists;
 import com.intellij.openapi.project.Project;
@@ -27,15 +27,15 @@ public class GillesUtil {
      * @param key     to check
      * @return matching properties
      */
-    public static List<GillesAssign> findProperties(Project project, String key) {
-        List<GillesAssign> result = new ArrayList<>();
+    public static List<GillesAssignBlock> findProperties(Project project, String key) {
+        List<GillesAssignBlock> result = new ArrayList<>();
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(GillesFileType.INSTANCE, GlobalSearchScope.allScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
             GillesFile gillesFile = (GillesFile) PsiManager.getInstance(project).findFile(virtualFile);
             if (gillesFile != null) {
-                Collection<GillesAssign> properties = PsiTreeUtil.collectElementsOfType(gillesFile, GillesAssign.class);
-                for (GillesAssign property : properties) {
+                Collection<GillesAssignBlock> properties = PsiTreeUtil.collectElementsOfType(gillesFile, GillesAssignBlock.class);
+                for (GillesAssignBlock property : properties) {
                     if (key.equals(property.getKey())) {
                         result.add(property);
                     }
@@ -45,14 +45,14 @@ public class GillesUtil {
         return result;
     }
 
-    public static List<GillesAssign> findProperties(Project project) {
-        List<GillesAssign> result = new ArrayList<>();
+    public static List<GillesAssignBlock> findProperties(Project project) {
+        List<GillesAssignBlock> result = new ArrayList<>();
         Collection<VirtualFile> virtualFiles =
                 FileTypeIndex.getFiles(GillesFileType.INSTANCE, GlobalSearchScope.allScope(project));
         for (VirtualFile virtualFile : virtualFiles) {
             GillesFile gillesFile = (GillesFile) PsiManager.getInstance(project).findFile(virtualFile);
             if (gillesFile != null) {
-                Collection<GillesAssign> properties = PsiTreeUtil.collectElementsOfType(gillesFile, GillesAssign.class);
+                Collection<GillesAssignBlock> properties = PsiTreeUtil.collectElementsOfType(gillesFile, GillesAssignBlock.class);
                 result.addAll(properties);
             }
         }
@@ -62,7 +62,7 @@ public class GillesUtil {
     /**
      * Attempts to collect any comment elements above the Gilles key/value pair.
      */
-    public static @NotNull String findDocumentationComment(GillesAssign property) {
+    public static @NotNull String findDocumentationComment(GillesAssignBlock property) {
         List<String> result = new LinkedList<>();
         PsiElement element = property.getPrevSibling();
         while (element instanceof PsiComment || element instanceof PsiWhiteSpace) {

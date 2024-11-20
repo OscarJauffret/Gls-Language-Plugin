@@ -1,6 +1,6 @@
 package com.gls.glsplugin.language;
 
-import com.gls.glsplugin.language.psi.GillesAssign;
+import com.gls.glsplugin.language.psi.GillesAssignBlock;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerProvider;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
@@ -35,7 +35,7 @@ public class GillesLineMarkerProvider extends RelatedItemLineMarkerProvider {
         String possibleProperties = value.substring(
                 GillesAnnotator.GILLES_PREFIX_STR.length() + GillesAnnotator.GILLES_SEPARATOR_STR.length()
         );
-        final List<GillesAssign> properties = GillesUtil.findProperties(project, possibleProperties);
+        final List<GillesAssignBlock> properties = GillesUtil.findProperties(project, possibleProperties);
         if (!properties.isEmpty()) {
             // Add the property to a collection of line marker info
             NavigationGutterIconBuilder<PsiElement> builder =

@@ -1,11 +1,15 @@
 package com.gls.glsplugin.language;
 
+import com.gls.glsplugin.language.psi.GillesAssignBlock;
+import com.gls.glsplugin.language.psi.GillesTokenType;
 import com.gls.glsplugin.language.psi.GillesTypes;
+import com.gls.glsplugin.language.psi.impl.GillesCodeImpl;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,15 +27,17 @@ public class GillesCompletionContributor extends CompletionContributor {
         initFirstSets();
         extend(CompletionType.BASIC,
                 PlatformPatterns.psiElement()
-                        .afterLeaf(PlatformPatterns.psiElement(GillesTypes.LET)),
+                        .inside(PlatformPatterns.psiElement(GillesCodeImpl.class)),
                 new CompletionProvider<>() {
                     @Override
                     protected void addCompletions(@NotNull CompletionParameters parameters,
                                                   @NotNull ProcessingContext context,
                                                   @NotNull CompletionResultSet resultSet) {
-                        // Suggestions pour le nom du programme
-                        resultSet.addElement(LookupElementBuilder.create("My_program"));
-                        resultSet.addElement(LookupElementBuilder.create("Another_program"));
+                        // Suggestions pour les instructions dans Code
+                        Set<String> instructions = Set.of("IF", "WHILE", "OUT", "IN", "VARNAME");
+                        for (String instruction : instructions) {
+                            resultSet.addElement(LookupElementBuilder.create(instruction));
+                        }
                     }
                 });
 

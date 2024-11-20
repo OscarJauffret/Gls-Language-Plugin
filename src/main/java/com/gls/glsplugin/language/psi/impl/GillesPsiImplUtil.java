@@ -2,13 +2,13 @@ package com.gls.glsplugin.language.psi.impl;
 
 import com.gls.glsplugin.language.psi.GillesElementFactory;
 import com.intellij.lang.ASTNode;
-import com.gls.glsplugin.language.psi.GillesAssign;
+import com.gls.glsplugin.language.psi.GillesAssignBlock;
 import com.gls.glsplugin.language.psi.GillesTypes;
 import com.intellij.psi.PsiElement;
 
 public class GillesPsiImplUtil {
 
-    public static String getKey(GillesAssign element) {
+    public static String getKey(GillesAssignBlock element) {
         ASTNode keyNode = element.getNode().findChildByType(GillesTypes.VARNAME);
         if (keyNode != null) {
             // IMPORTANT: Convert embedded escaped spaces to simple spaces
@@ -18,7 +18,7 @@ public class GillesPsiImplUtil {
         }
     }
 
-    public static String getValue(GillesAssign element) {
+    public static String getValue(GillesAssignBlock element) {
         ASTNode valueNode = element.getNode().findChildByType(GillesTypes.EXPR_ARITH);
         if (valueNode != null) {
             return valueNode.getText();
@@ -27,14 +27,14 @@ public class GillesPsiImplUtil {
         }
     }
 
-    public static String getName(GillesAssign element) {
+    public static String getName(GillesAssignBlock element) {
         return getKey(element);
     }
 
-    public static PsiElement setName(GillesAssign element, String newName) {
+    public static PsiElement setName(GillesAssignBlock element, String newName) {
         ASTNode keyNode = element.getNode().findChildByType(GillesTypes.VARNAME);
         if (keyNode != null) {
-            GillesAssign property =
+            GillesAssignBlock property =
                     GillesElementFactory.createProperty(element.getProject(), newName);
             if (property != null) {
                 ASTNode newKeyNode = property.getFirstChild().getNode();
@@ -44,7 +44,7 @@ public class GillesPsiImplUtil {
         return element;
     }
 
-    public static PsiElement getNameIdentifier(GillesAssign element) {
+    public static PsiElement getNameIdentifier(GillesAssignBlock element) {
         ASTNode keyNode = element.getNode().findChildByType(GillesTypes.VARNAME);
         return keyNode != null ? keyNode.getPsi() : null;
     }

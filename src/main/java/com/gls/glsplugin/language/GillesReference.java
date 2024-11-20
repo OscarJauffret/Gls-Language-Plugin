@@ -1,6 +1,6 @@
 package com.gls.glsplugin.language;
 
-import com.gls.glsplugin.language.psi.GillesAssign;
+import com.gls.glsplugin.language.psi.GillesAssignBlock;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
@@ -23,9 +23,9 @@ final class GillesReference extends PsiReferenceBase<PsiElement> implements PsiP
     @Override
     public ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<GillesAssign> properties = GillesUtil.findProperties(project, key);
+        final List<GillesAssignBlock> properties = GillesUtil.findProperties(project, key);
         List<ResolveResult> results = new ArrayList<>();
-        for (GillesAssign property : properties) {
+        for (GillesAssignBlock property : properties) {
             results.add(new PsiElementResolveResult(property));
         }
         return results.toArray(new ResolveResult[0]);
@@ -41,9 +41,9 @@ final class GillesReference extends PsiReferenceBase<PsiElement> implements PsiP
     @Override
     public Object @NotNull [] getVariants() {
         Project project = myElement.getProject();
-        List<GillesAssign> properties = GillesUtil.findProperties(project);
+        List<GillesAssignBlock> properties = GillesUtil.findProperties(project);
         List<LookupElement> variants = new ArrayList<>();
-        for (final GillesAssign property : properties) {
+        for (final GillesAssignBlock property : properties) {
             if (property.getKey() != null && !property.getKey().isEmpty()) {
                 variants.add(LookupElementBuilder
                         .create(property).withIcon(GillesIcons.FILE)

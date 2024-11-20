@@ -14,68 +14,42 @@
 
   psiImplUtilClass="com.gls.glsplugin.language.psi.impl.GillesPsiImplUtil"
 
-  tokens=[
-    PROGNAME = "regexp:[A-Z]([a-z]|_)*"
-    VARNAME = "regexp:[a-z]([a-z]|\\d)*"
-    NUMBER = "regexp:\d+"
-    LET = "LET"
-    BE = "BE"
-    END = "END"
-    COLON = ":"
-    ASSIGN_OP = "="
-    LPAREN = "("
-    RPAREN = ")"
-    MINUS = "-"
-    PLUS = "+"
-    TIMES = "*"
-    DIVIDE = "/"
-    IF_INSTR = "IF"
-    THEN = "THEN"
-    ELSE = "ELSE"
-    LBRACK = "{"
-    RBRACK = "}"
-    IMPLIES = "->"
-    PIPE = "|"
-    EQUAL = "=="
-    SMALEQ = "<="
-    SMALLER = "<"
-    WHILE_INSTR = "WHILE"
-    REPEAT = "REPEAT"
-    OUTPUT_OP = "OUT"
-    INPUT_OP = "IN"
-]
 }
 
-GillesFile ::= Program?;
+gilles_file ::= program?
 
-Program ::= "LET" PROGNAME "BE" Code "END"
-Code ::= (Instruction ":")*;
-Instruction ::= Assign | If | While | Output | Input;
+program ::= LET PROGNAME BE code? END
+code ::= (instruction COLON)* {
+    pin=2
+    recoverWhile="recover_code"
+}
+private recover_code ::= !(ELSE|END)
 
-Assign ::= VARNAME ASSIGN_OP ExprArith {
-    pin=3
-    recoverWhile="recover_property"
+instruction ::= assign_block | if_block | while_block | output | input
+
+assign_block ::= VARNAME ASSIGN expr_arith {
+    pin=2
     mixin="com.gls.glsplugin.language.psi.impl.GillesNamedElementImpl"
     implements="com.gls.glsplugin.language.psi.GillesNamedElement"
     methods=[getKey getValue getName setName getNameIdentifier]
 }
 
-ExprArith ::= Prod ExprArithTail;
-ExprArithTail ::= ("+" Prod ExprArithTail | "-" Prod ExprArithTail)? ;
-Prod ::= Factor ProdTail;
-ProdTail ::= ("*" Factor ProdTail | "/" Factor ProdTail)? ;
-Factor ::= "-"Factor | Atom;
-Atom ::= VARNAME | NUMBER | "(" ExprArith ")";
+expr_arith ::= prod expr_arith_tail
+expr_arith_tail ::= (PLUS prod expr_arith_tail | MINUS prod expr_arith_tail)?
+prod ::= factor prod_tail
+prod_tail ::= (TIMES factor prod_tail | DIVIDE factor prod_tail)?
+factor ::= MINUS factor | atom
+atom ::= VARNAME | NUMBER | LPAREN expr_arith RPAREN
 
-If ::= IF_INSTR "{"Cond"}" "THEN" Code IfTail;
-IfTail ::= "ELSE" Code "END" | "END";
+if_block ::= IF LBRACK cond RBRACK THEN code if_tail
+if_tail ::= ELSE code END | END
 
-Cond ::= FinalCond CondTail;
-CondTail ::= (IMPLIES Cond)?;
-FinalCond ::= PIPE Cond PIPE | ExprArith Comp ExprArith;
+cond ::= final_cond cond_tail
+cond_tail ::= (IMPLIES cond)?
+final_cond ::= PIPE cond PIPE | expr_arith comp expr_arith
 
-Comp ::= "==" | "<=" | "<";
-While ::= WHILE_INSTR "{"Cond"}" "REPEAT" Code "END";
-Output ::= OUTPUT_OP "(" VARNAME ")";
-Input ::= INPUT_OP "(" VARNAME ")";
+comp ::= EQUAL | SMALEQ | SMALLER
+while_block ::= WHILE LBRACK cond RBRACK REPEAT code END
+output ::= OUT LPAREN VARNAME RPAREN
+input ::= IN LPAREN VARNAME RPAREN
 
