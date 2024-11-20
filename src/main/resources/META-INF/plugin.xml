@@ -55,5 +55,9 @@
         <!-- <psi.referenceContributor language="JAVA" implementation="com.gls.glsplugin.language.GillesReferenceContributor"/>
         <lang.refactoringSupport language="Gilles" implementationClass="com.gls.glsplugin.language.GillesRefactoringSupportProvider"/> -->
         <typedHandler implementation="com.gls.glsplugin.language.GillesTypedHandler" />
+        <defaultLiveTemplates file="/liveTemplates/Gilles.xml"/>
+        <liveTemplateContext
+                contextId="GILLES"
+                implementation="com.gls.glsplugin.language.GillesContext"/>
     </extensions>
 </idea-plugin>

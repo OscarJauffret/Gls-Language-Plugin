@@ -1,0 +1,24 @@
+<templateSet group="Gilles">
+    <template name="if" value="IF {$COND$} THEN&#10;$CODE$&#10;END:" description="Standard if statement" toReformat="false" toShortenFQNames="true">
+        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="CODE" expression="complete()" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="GILLES" value="true"/>
+        </context>
+    </template>
+    <template name="while" value="WHILE {$COND$} REPEAT&#10;$CODE$&#10;END:" description="Standard while loop" toReformat="false" toShortenFQNames="true">
+        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="CODE" expression="complete()" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="GILLES" value="true"/>
+        </context>
+    </template>
+    <template name="for" value="FOR $ASSIGN$ TO $EXPR$ REPEAT&#10; $CODE$&#10;END:" description="Standard for loop" toReformat="false" toShortenFQNames="true">
+        <variable name="ASSIGN" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="EXPR" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="CODE" expression="complete()" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="GILLES" value="true"/>
+        </context>
+    </template>
+</templateSet>

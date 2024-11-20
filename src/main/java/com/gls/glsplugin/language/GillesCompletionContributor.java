@@ -26,6 +26,28 @@ public class GillesCompletionContributor extends CompletionContributor {
     public GillesCompletionContributor() {
         initFirstSets();
         extend(CompletionType.BASIC,
+                PlatformPatterns.psiElement(),
+                new CompletionProvider<>() {
+                    @Override
+                    protected void addCompletions(@NotNull CompletionParameters parameters,
+                                                  @NotNull ProcessingContext context,
+                                                  @NotNull CompletionResultSet resultSet) {
+                        String keyword = parameters.getPosition().getText();
+                        String regex = "IntellijIdeaRulezzz";
+                        // remove the IntellijIdeaRulezzz suffix
+                        keyword = keyword.replaceAll(regex, "");
+                        System.out.println("keyword: " + keyword);
+                        if (keyword.toLowerCase().startsWith("if")) {
+                            resultSet.addElement(LookupElementBuilder.create("IF {} THEN\n    \nEND:")
+                                    .withInsertHandler((context1, item) -> {
+                                        int startOffset = context1.getEditor().getCaretModel().getOffset();
+                                        context1.getEditor().getCaretModel().moveToOffset(startOffset - 16);
+                                    }));
+                        }
+                    }
+                });
+
+        extend(CompletionType.BASIC,
                 PlatformPatterns.psiElement()
                         .inside(PlatformPatterns.psiElement(GillesCodeImpl.class)),
                 new CompletionProvider<>() {
