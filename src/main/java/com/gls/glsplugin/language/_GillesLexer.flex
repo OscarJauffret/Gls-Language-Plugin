@@ -58,6 +58,7 @@ Comment = "$"
   "+"                 { yybegin(YYINITIAL); return GillesTypes.PLUS; }
   "*"                 { yybegin(YYINITIAL); return GillesTypes.TIMES; }
   "/"                 { yybegin(YYINITIAL); return GillesTypes.DIVIDE; }
+  "%"                 { yybegin(YYINITIAL); return GillesTypes.MODULO; }
   "IF"                { yybegin(YYINITIAL); return GillesTypes.IF; }
   "THEN"              { yybegin(YYINITIAL); return GillesTypes.THEN; }
   "ELSE"              { yybegin(YYINITIAL); return GillesTypes.ELSE; }
@@ -66,10 +67,15 @@ Comment = "$"
   "->"                { yybegin(YYINITIAL); return GillesTypes.IMPLIES; }
   "|"                 { yybegin(YYINITIAL); return GillesTypes.PIPE; }
   "=="                { yybegin(YYINITIAL); return GillesTypes.EQUAL; }
+  "!="                { yybegin(YYINITIAL); return GillesTypes.NEQUAL; }
   "<="                { yybegin(YYINITIAL); return GillesTypes.SMALEQ; }
+  ">="                { yybegin(YYINITIAL); return GillesTypes.BIGEQ; }
   "<"                 { yybegin(YYINITIAL); return GillesTypes.SMALLER; }
+  ">"                 { yybegin(YYINITIAL); return GillesTypes.BIGGER; }
   "WHILE"             { yybegin(YYINITIAL); return GillesTypes.WHILE; }
   "REPEAT"            { yybegin(YYINITIAL); return GillesTypes.REPEAT; }
+  "FOR"               { yybegin(YYINITIAL); return GillesTypes.FOR; }
+  "TO"                { yybegin(YYINITIAL); return GillesTypes.TO; }
   "OUT"               { yybegin(YYINITIAL); return GillesTypes.OUT; }
   "IN"                { yybegin(YYINITIAL); return GillesTypes.IN; }
 

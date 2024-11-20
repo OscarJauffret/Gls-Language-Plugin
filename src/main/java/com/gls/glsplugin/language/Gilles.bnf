@@ -25,7 +25,7 @@ code ::= (instruction COLON)* {
 }
 private recover_code ::= !(ELSE|END)
 
-instruction ::= assign_block | if_block | while_block | output | input
+instruction ::= assign_block | if_block | while_block | for_block | output | input
 
 assign_block ::= VARNAME ASSIGN expr_arith {
     pin=2
@@ -37,7 +37,7 @@ assign_block ::= VARNAME ASSIGN expr_arith {
 expr_arith ::= prod expr_arith_tail
 expr_arith_tail ::= (PLUS prod expr_arith_tail | MINUS prod expr_arith_tail)?
 prod ::= factor prod_tail
-prod_tail ::= (TIMES factor prod_tail | DIVIDE factor prod_tail)?
+prod_tail ::= (TIMES factor prod_tail | DIVIDE factor prod_tail | MODULO factor prod_tail)?
 factor ::= MINUS factor | atom
 atom ::= VARNAME | NUMBER | LPAREN expr_arith RPAREN
 
@@ -48,8 +48,9 @@ cond ::= final_cond cond_tail
 cond_tail ::= (IMPLIES cond)?
 final_cond ::= PIPE cond PIPE | expr_arith comp expr_arith
 
-comp ::= EQUAL | SMALEQ | SMALLER
+comp ::= EQUAL | NEQUAL | SMALEQ | SMALLER | BIGEQ | BIGGER
 while_block ::= WHILE LBRACK cond RBRACK REPEAT code END
+for_block ::= FOR assign_block TO expr_arith REPEAT code END
 output ::= OUT LPAREN VARNAME RPAREN
 input ::= IN LPAREN VARNAME RPAREN
 
