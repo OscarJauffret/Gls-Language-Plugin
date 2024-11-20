@@ -6,6 +6,14 @@
             <option name="GILLES" value="true"/>
         </context>
     </template>
+    <template name="ifel" value="IF {$COND$} THEN&#10;$CODE1$&#10;ELSE&#10;$CODE2$&#10;END:" description="If-Else statement" toReformat="false" toShortenFQNames="true">
+        <variable name="COND" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="CODE1" expression="complete()" defaultValue="" alwaysStopAt="true" />
+        <variable name="CODE2" expression="complete()" defaultValue="" alwaysStopAt="true" />
+        <context>
+            <option name="GILLES" value="true"/>
+        </context>
+    </template>
     <template name="while" value="WHILE {$COND$} REPEAT&#10;$CODE$&#10;END:" description="Standard while loop" toReformat="false" toShortenFQNames="true">
         <variable name="COND" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="CODE" expression="complete()" defaultValue="" alwaysStopAt="true" />
