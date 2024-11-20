@@ -14,24 +14,75 @@
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    This plugin adds features such as syntax highlighting for the *made up* Gilles language.
+    <h3>
+      Gilles Language Plugin
+    </h3>
+    This plugin enhances the development experience for the custom Gilles language by providing features like syntax highlighting, custom file support, and more.
 
-    <p>Features:</p>
+    <h4>Features</h4>
     <ul>
-      <li>Syntax highlighting</li>
-      <li>Custom file type</li>
-      <li>Color settings page</li>
+      <li>Syntax highlighting for easy readability</li>
+      <li>Custom file type registration for .gls files</li>
+      <li>Color settings customization for your code</li>
+      <li>Error detection for cleaner code</li>
+      <li>Code completion to speed up development</li>
+      <li>Live templates for common code patterns</li>
+      <li>Automatic code commenting</li>
     </ul>
 
-    If you have any feedback or issues, please feel free to leave them on the <a href="https://github.com/OscarJauffret/Gls-Language-Plugin/issues">GitHub page</a>.
+    In addition to supporting the core features of the Gilles language, this plugin extends its functionality with:
+    <ul>
+      <li>FOR loops for iterative operations</li>
+      <li>Additional comparison operators: `!=`, `>=`, and `>`</li>
+      <li>`%` operator for modulo operations, with the same precedence as `*` and `/`</li>
+    </ul>
+
+    The syntax for FOR loops follows the pattern:
+    <br>
+    <code>FOR $Assign$ TO $Expr$ REPEAT $Code$ END</code>
+
+    <h4>Live Templates</h4>
+    Live templates make coding in Gilles faster by offering predefined code snippets. Just type the template name and press the Tab key to insert it.
+    Currently available templates include:
+    <ul>
+      <li><code>if</code> - Standard conditional block</li>
+      <li><code>ifel</code> - Conditional block with an `else` statement</li>
+      <li><code>while</code> - Loop structure for repeating actions</li>
+      <li><code>for</code> - Iterative loop</li>
+      <li><code>prog</code> - Boilerplate for defining a new program</li>
+    </ul>
+
+    <h4>
+      Feedback and Support
+    </h4>
+    If you encounter any issues or have suggestions, feel free to submit them on our <a href="https://github.com/OscarJauffret/Gls-Language-Plugin/issues">GitHub page</a>
   ]]></description>
+
+    <change-notes><![CDATA[
+    <p><u>Version 1.2</u></p>
+    <ul>
+      <li>Added live templates and completion</li>
+      <li>Extended syntax with FOR loops, comparison operators and %</li>
+      <li>Added commenter</li>
+    </ul>
+    <p><u>Version 1.1</u></p>
+    <ul>
+      <li>Fixed a bug with invalid tokens</li>
+    </ul>
+    <p><u>Version 1.0</u></p>
+    <ul>
+      <li>Added color settings page</li>
+      <li>Added syntax highlighting</li>
+      <li>Added error detection</li>
+    </ul>
+    ]]></change-notes>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
-    <version>1.1</version>
+    <version>1.2</version>
     <idea-version since-build="232.1" until-build="243.*"/>
 
     <!-- Extension points defined by the plugin.

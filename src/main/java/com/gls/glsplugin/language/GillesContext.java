@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class GillesContext extends TemplateContextType {
 
     protected GillesContext() {
-        super("GILLES", "Gilles");
+        super("Gilles");
     }
 
     @Override
