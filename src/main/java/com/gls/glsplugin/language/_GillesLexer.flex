@@ -31,11 +31,9 @@ import com.gls.glsplugin.language.psi.GillesTypes;import groovyjarjarantlr.Token
 EOL=\R
 WHITE_SPACE=\s+
 
-PROGNAME=[A-Z]([a-z]|_)*
-VARNAME=[a-z]([a-z]|\[0-9])*
-NUMBER=[0-9]+
-
-INVALID_NAME=([A-Z]|[a-z]|[0-9]|_)+
+PROGNAME=[A-Z]([A-Z]|[a-z]|_)*
+VARNAME=[a-z]([A-Z]|[a-z]|\[0-9])*
+NUMBER=[1-9][0-9]* | 0
 
 MultilineComment = "!!"
 Comment = "$"
@@ -82,9 +80,8 @@ Comment = "$"
   {PROGNAME}          { yybegin(YYINITIAL); return GillesTypes.PROGNAME; }
   {VARNAME}           { yybegin(YYINITIAL); return GillesTypes.VARNAME; }
   {NUMBER}            { yybegin(YYINITIAL); return GillesTypes.NUMBER; }
-  {INVALID_NAME}      { yybegin(YYINITIAL); return TokenType.BAD_CHARACTER; }
 
-[^] { return TokenType.BAD_CHARACTER; }
+  [^] { return TokenType.BAD_CHARACTER; }
 }
 
 <MULTILINECOMMENTSTART> {
