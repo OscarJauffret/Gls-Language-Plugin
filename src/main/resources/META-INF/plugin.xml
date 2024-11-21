@@ -64,6 +64,7 @@
       <li>Added live templates and completion</li>
       <li>Extended syntax with FOR loops, comparison operators and %</li>
       <li>Added commenter</li>
+      <li>Fixed an issue with valid program names and variable names not being recognized</li>
     </ul>
     <p><u>Version 1.1</u></p>
     <ul>
