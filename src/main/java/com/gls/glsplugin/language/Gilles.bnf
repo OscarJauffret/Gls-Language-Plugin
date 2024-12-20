@@ -16,41 +16,64 @@
 
 }
 
-gilles_file ::= program?
+gilles_file ::= module?
 
-program ::= LET PROGNAME BE code? END
-code ::= (instruction COLON)* {
+module ::= (function_block)* program
+function_block ::= FUNCTION PROGNAME LPAREN parameter_list? RPAREN RETURNS primitive_type code return_stmt END
+
+program ::= LET PROGNAME BE code END
+code ::= (instruction COLON code)? {
     pin=2
     recoverWhile="recover_code"
 }
-private recover_code ::= !(ELSE|END)
+private recover_code ::= !(ELSE|END|RETURN)
 
-instruction ::= assign_block | if_block | while_block | for_block | output | input
+parameter_list ::= parameter parameter_tail
+parameter_tail ::= (COMMA parameter parameter_tail)?
+parameter ::= primitive_type VARNAME
+primitive_type ::= INT | FLOAT | BOOL
+array_type ::= LIST OF primitive_type
 
-assign_block ::= VARNAME ASSIGN expr_arith {
-    pin=2
-    mixin="com.gls.glsplugin.language.psi.impl.GillesNamedElementImpl"
-    implements="com.gls.glsplugin.language.psi.GillesNamedElement"
-    methods=[getKey getValue getName setName getNameIdentifier]
-}
+return_stmt ::= RETURN value
+
+value ::= expr_arith | PIPE cond PIPE
+
+variable ::= VARNAME variable_tail
+variable_tail ::= (LSBRACK expr_arith RSBRACK)?
+
+instruction ::= assign_block | assign_list | if_block | while_block | for_block | output | input
+
+assign_block ::= primitive_type variable ASSIGN value | variable ASSIGN value
+
+assign_list ::= array_type VARNAME ASSIGN LSBRACK value_list RSBRACK
 
 expr_arith ::= prod expr_arith_tail
 expr_arith_tail ::= (PLUS prod expr_arith_tail | MINUS prod expr_arith_tail)?
 prod ::= factor prod_tail
 prod_tail ::= (TIMES factor prod_tail | DIVIDE factor prod_tail | MODULO factor prod_tail)?
 factor ::= MINUS factor | atom
-atom ::= VARNAME | NUMBER | LPAREN expr_arith RPAREN
+atom ::= variable | NUMBER | REALNUMBER | LPAREN expr_arith RPAREN | function_call
 
 if_block ::= IF LBRACK cond RBRACK THEN code if_tail
 if_tail ::= ELSE code END | END
 
-cond ::= final_cond cond_tail
-cond_tail ::= (IMPLIES cond)?
-final_cond ::= PIPE cond PIPE | expr_arith comp expr_arith
+cond ::= cond_prime cond_tail
+cond_tail ::= (OR cond | AND cond)?
+cond_prime ::= cond_second cond_prime_tail
+cond_prime_tail ::= (IMPLIES cond_prime)?
+cond_second ::= NOT cond_second | final_cond
+final_cond ::= PIPE cond PIPE | expr_arith comp expr_arith | TRUE | FALSE
 
 comp ::= EQUAL | NEQUAL | SMALEQ | SMALLER | BIGEQ | BIGGER
 while_block ::= WHILE LBRACK cond RBRACK REPEAT code END
-for_block ::= FOR assign_block TO expr_arith REPEAT code END
-output ::= OUT LPAREN VARNAME RPAREN
+for_block ::= FOR for_init TO expr_arith REPEAT code END
+for_init ::= INT VARNAME ASSIGN expr_arith
+
+function_call ::= PROGNAME LPAREN value_list RPAREN
+
+value_list ::= value value_list_tail
+value_list_tail ::= (COMMA value value_list_tail)?
+
+output ::= OUT LPAREN expr_arith RPAREN
 input ::= IN LPAREN VARNAME RPAREN
 

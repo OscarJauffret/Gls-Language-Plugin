@@ -30,6 +30,10 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("GILLES_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
     public static final TextAttributesKey IDENTIFIER =
             createTextAttributesKey("GILLES_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
+    public static final TextAttributesKey TYPE =
+            createTextAttributesKey("GILLES_TYPE", DefaultLanguageHighlighterColors.CLASS_NAME);
+    public static final TextAttributesKey NUMBER =
+            createTextAttributesKey("GILLES_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
@@ -41,6 +45,8 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] BLOCK_COMMENT_KEYS = new TextAttributesKey[]{BLOCK_COMMENT};
     private static final TextAttributesKey[] IDENTIFIER_KEYS = new TextAttributesKey[]{IDENTIFIER};
     private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+    private static final TextAttributesKey[] TYPE_KEYS = new TextAttributesKey[]{TYPE};
+    private static final TextAttributesKey[] NUMBER_KEYS = new TextAttributesKey[]{NUMBER};
 
 
     /**
@@ -63,12 +69,14 @@ public class GillesSyntaxHighlighter extends SyntaxHighlighterBase {
      */
     @Override
     public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(GillesTypes.VARNAME)) {
-            return VALUE_KEYS;
-        } else if (tokenType.equals(GillesTypes.NUMBER)) {
+        if (GillesTokenSets.KEYWORDS.contains(tokenType)) {
             return KEY_KEYS;
-        } else if (GillesTokenSets.KEYWORDS.contains(tokenType)) {
-            return KEY_KEYS;
+        } else if (tokenType.equals(GillesTypes.VARNAME)) {
+            return EMPTY_KEYS;
+        } else if (tokenType.equals(GillesTypes.NUMBER) || tokenType.equals(GillesTypes.REALNUMBER)) {
+            return NUMBER_KEYS;
+        } else if (GillesTokenSets.TYPES.contains(tokenType)) {
+            return TYPE_KEYS;
         } else if (tokenType.equals(TokenType.WHITE_SPACE)) {
             return LINE_COMMENT_KEYS;
         } else if (tokenType.equals(GillesTypes.PROGNAME)) {

@@ -14,7 +14,7 @@ public class GillesTypedHandler extends TypedHandlerDelegate {
             return Result.CONTINUE;
         }
 
-        // Complete {, ( with } and )
+        // Complete {, (, |, [ with }, ), |, ]
         if (c == '{') {
             EditorModificationUtil.insertStringAtCaret(editor, "}", false, 0);
             return Result.STOP;
@@ -22,6 +22,16 @@ public class GillesTypedHandler extends TypedHandlerDelegate {
 
         if (c == '(') {
             EditorModificationUtil.insertStringAtCaret(editor, ")", false, 0);
+            return Result.STOP;
+        }
+
+        if (c == '|') {
+            EditorModificationUtil.insertStringAtCaret(editor, "|", false, 0);
+            return Result.STOP;
+        }
+
+        if (c == '[') {
+            EditorModificationUtil.insertStringAtCaret(editor, "]", false, 0);
             return Result.STOP;
         }
 
