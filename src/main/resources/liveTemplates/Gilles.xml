@@ -37,7 +37,7 @@
         <variable name="PROGNAME" expression="" defaultValue="&quot;MyFunction&quot;" alwaysStopAt="true" />
         <variable name="ARGUMENTS" expression="" defaultValue="" alwaysStopAt="true" />
         <variable name="TYPE" expression="" defaultValue="&quot;INT&quot;" alwaysStopAt="true" />
-        <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+        <variable name="VALUE" expression="" defaultValue="&quot;0&quot;" alwaysStopAt="true" />
         <variable name="CODE" expression="" defaultValue="" alwaysStopAt="true" />
         <context>
             <option name="GILLES" value="true" />
