@@ -92,6 +92,10 @@
   ]]></description>
 
     <change-notes><![CDATA[
+    <p><u>Version 2.1</u></p>
+    <ul>
+      <li>Fixed a bug with live templates</li>
+    </ul>
     <p><u>Version 2.0</u></p>
     <ul>
       <li>Added support for function definitions and calls</li>
@@ -122,7 +126,7 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.java</depends>
 
-    <version>2.0</version>
+    <version>2.1</version>
     <idea-version since-build="232.1" until-build="243.*"/>
 
     <!-- Extension points defined by the plugin.
