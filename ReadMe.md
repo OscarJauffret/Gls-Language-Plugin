@@ -32,19 +32,25 @@ In addition to supporting the core features of the Gilles language, this plugin 
 
 
 <ins>For loops</ins>
+
 <code>FOR INT \$Var\$ = \$Init\$ TO \$Expr\$ REPEAT \$Code\$ END</code>
 
 <ins>Function definitions</ins>
+
 <code>FUNCTION \$ProgName\$(\$ParamList\$) RETURNS \$Type\$ \$Code\$ RETURN \$Value\$ END</code>
 
 <ins>Function calls</ins>
+
 When calling a function, it is mandatory to assign the result to a variable or use it in an expression.
+
 <code>\$Variable\$ = \$FunctionName\$(\$ArgList\$)</code>
 
 <ins>Data types</ins>
+
 <code>INT \$VarName\$ = \$Value\$</code>, <code>BOOL \$VarName\$ = \$Value\$</code>, <code>FLOAT \$VarName\$ = \$Value\$</code>, <code>LIST OF <type> \$VarName\$ = [\$ValueList\$]</code>
 
 <ins>Printing expressions</ins>
+
 <code>OUT(\$Expression\$)</code>
 <br>
 
@@ -55,7 +61,6 @@ When calling a function, it is mandatory to assign the result to a variable or u
 > Live templates make coding in Gilles faster by offering predefined code snippets. Just type the template name and press the Tab key to insert it. If the live template includes a selection, such as <code>ifs</code>, select the code, and press CTRL + ALT + J (Windows) or OPTION + COMMAND + J (Mac)
 
 Currently available templates include:
-<ul>
 - <code>prog</code> - Boilerplate for defining a new program
 - <code>func</code> - Boilerplate for defining a new function
 - <code>if</code> - Standard conditional block
@@ -63,7 +68,6 @@ Currently available templates include:
 - <code>ifs</code> - Surrounds the selected code with an `if` block
 - <code>while</code> - Loop structure for repeating actions
 - <code>for</code> - Iterative loop
-</ul>
 
 ## Feedback and Support
 If you encounter any issues or have suggestions, feel free to submit them on our <a href="https://github.com/OscarJauffret/Gls-Language-Plugin/issues">GitHub page</a>
