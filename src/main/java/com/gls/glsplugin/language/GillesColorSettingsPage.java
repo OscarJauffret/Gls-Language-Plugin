@@ -37,23 +37,44 @@ final class GillesColorSettingsPage implements ColorSettingsPage {
     @Override
     public String getDemoText() {
         return """
-                !! HI !!
-                LET Euclidean_algorithm BE
-                  IN(a):
-                  IN(b):
-                  WHILE {0 < b} REPEAT
-                      c = b:
-                      WHILE {b <= a} REPEAT $ Euclidean Algo
-                        a = a-b:
-                      END:
-                      b = a:
-                      a = c:
-                  END:
-                  OUT(a):
+                !! Compute the square root of x !!
+                FUNCTION SquareRoot(FLOAT x) RETURNS FLOAT
+                    INT exp = -2:
+                    FLOAT result = 1.0:
+                    FOR INT i = 0 TO -exp REPEAT
+                        result = result / x:
+                    END:
+                    RETURN result
                 END
                 
-                UnexpecTed = 1
+                FUNCTION Delta(FLOAT a, FLOAT b, FLOAT c) RETURNS FLOAT
+                    RETURN b * b - 4 * a * c            $ Compute delta
+                END
                 
+                FUNCTION GetRoots(FLOAT a, FLOAT b, FLOAT c) RETURNS INT
+                    FLOAT d = Delta(a, b, c):
+                    INT hasRoots = 0:
+                    IF {d >= 0} THEN
+                        IF {d == 0} THEN
+                            OUT(-b / (2 * a)):
+                            hasRoots = 1:
+                        ELSE
+                            OUT((-b + SquareRoot(d)) / (2 * a)):
+                            OUT((-b - SquareRoot(d)) / (2 * a)):
+                            hasRoots = 2:
+                        END:
+                    END:
+                    RETURN hasRoots
+                END
+                
+                LET Main BE
+                    FLOAT a = 1.0:
+                    FLOAT b = -3.0:
+                    FLOAT c = 2.0:
+                    INT dummy = GetRoots(a, b, c):
+                END
+                
+                invalid_placement
                 """;
     }
 
