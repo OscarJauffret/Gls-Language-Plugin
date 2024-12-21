@@ -35,7 +35,7 @@
     <ul>
       <li>Function definitions with the `FUNCTION` keyword</li>
       <li>Function calls</li>
-      <li>Data types: `INT`, `BOOL`, `FLOAT`, and `LIST OF <type>`</li>
+      <li>Data types: `INT`, `BOOL`, `FLOAT`, and `LIST OF $type$`</li>
       <li>FOR loops for iterative operations</li>
       <li>Printing expressions directly without using a variable</li>
       <li>Additional comparison operators: `!=`, `>=`, and `>`</li>
@@ -56,7 +56,7 @@
     <p><u>Function calls</u></p>
     <code>$Variable$ = $FunctionName$($ArgList$)</code>
     <br>
-    When calling a function, it is mandatory to assign the result to a variable or use it in an expression.
+    When calling a function, it is mandatory to assign the result to a variable or to use it in an expression.
     <br>
 
     <p><u>Data types</u></p>
@@ -95,11 +95,12 @@
     <p><u>Version 2.1</u></p>
     <ul>
       <li>Fixed a bug with live templates</li>
+      <li>Fixed an issue with value lists that could not be empty</li>
     </ul>
     <p><u>Version 2.0</u></p>
     <ul>
       <li>Added support for function definitions and calls</li>
-      <li>Added data types: INT, BOOL, FLOAT, and LIST OF <type></li>
+      <li>Added data types: INT, BOOL, FLOAT, and LIST OF &lt;type&gt;</li>
       <li>Added logical operators: AND, OR, and NOT</li>
     </ul>
     <p><u>Version 1.2</u></p>

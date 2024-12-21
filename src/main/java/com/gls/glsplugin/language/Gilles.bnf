@@ -19,7 +19,7 @@
 gilles_file ::= module?
 
 module ::= (function_block)* program
-function_block ::= FUNCTION PROGNAME LPAREN parameter_list? RPAREN RETURNS primitive_type code return_stmt END
+function_block ::= FUNCTION PROGNAME LPAREN parameter_list RPAREN RETURNS primitive_type code return_stmt END
 
 program ::= LET PROGNAME BE code END
 code ::= (instruction COLON code)? {
@@ -28,7 +28,7 @@ code ::= (instruction COLON code)? {
 }
 private recover_code ::= !(ELSE|END|RETURN)
 
-parameter_list ::= parameter parameter_tail
+parameter_list ::= (parameter parameter_tail)?
 parameter_tail ::= (COMMA parameter parameter_tail)?
 parameter ::= primitive_type VARNAME
 primitive_type ::= INT | FLOAT | BOOL
@@ -71,7 +71,7 @@ for_init ::= INT VARNAME ASSIGN expr_arith
 
 function_call ::= PROGNAME LPAREN value_list RPAREN
 
-value_list ::= value value_list_tail
+value_list ::= (value value_list_tail)?
 value_list_tail ::= (COMMA value value_list_tail)?
 
 output ::= OUT LPAREN expr_arith RPAREN
